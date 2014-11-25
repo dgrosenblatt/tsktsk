@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="small-6 large-centered columns">
+    <div class="panel callout">My to do list:</div>
+      <form action="/tasks" method="post">
+        <input type="text" name="new_task" placeholder="Add a task"/>
+        <div class="small-6 large-centered columns">
+            <input type="submit" class="button expand" />
+            <p>
+              OR text (339) 230-0494
+            </p>
+        </div>
+      </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-6 large-centered columns">
+    <div class="icon-bar five-up">
+      <a class="item" href="/tasks?sort=all">
+        <img src="img/fi-home.svg" >
+        <label>All tasks</label>
+      </a>
+      <a class="item" href="/tasks?sort=done">
+        <img src="img/fi-bookmark.svg" >
+        <label>Done</label>
+      </a>
+      <a class="item" href="/tasks?sort=todo">
+        <img src="img/fi-info.svg" >
+        <label>To Do</label>
+      </a>
+      <a class="item" href="/tasks?sort=pts">
+        <img src="img/fi-mail.svg" >
+        <label>Points</label>
+      </a>
+      <a class="item" href="/tasks?sort=recent">
+        <img src="img/fi-like.svg" >
+        <label>Recent</label>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="small-6 large-centered columns">
+    <!-- Display each task -->
+    <% @tasks.each do |task| %>
+
+        <div class="panel">
+          <p>
+            <a href="/tasks/upvote/<%= task["id"] %>">&#x25B2</a> <%= task["description"] %>
+          </p>
+          <p>
+            <%= task["points"] %> Points
+          </p>
+          <p>
+            started: <%= task["start"] %>
+          </p>
+          <% if task["finish"] %>
+            <p>
+              finished: <%= task["finish"] %>
+            </p>
+          <% else %>
+            <p>
+              <a href="/tasks/finished/<%= task["id"] %>">I'm done</a>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+
+  </div>
+</div>
